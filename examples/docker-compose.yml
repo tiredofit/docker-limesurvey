@@ -1,0 +1,77 @@
+version: '3.7'
+services:
+
+  limesurvey-app:
+    image: tiredofit/limesurvey:latest
+    container_name: limesurvey-app
+    labels:
+      - traefik.enable=true
+      - traefik.frontend.rule=Host:limesurvey.example.com
+      - traefik.port=80
+      - traefik.protocol=http
+      - traefik.docker.network=proxy
+      - traefik.backend=limesurvey-app
+    volumes:
+      - ./data:/www/html/upload
+      - ./logs/:/www/logs
+      - ./assets/custom:/assets/custom
+    environment:
+      - ZABBIX_HOSTNAME=limesurvey-app
+
+      - DB_HOST=limesurvey-db
+      - DB_NAME=limesurvey
+      - DB_USER=limesurvey
+      - DB_PASS=limesurveypass
+
+      - ADMIN_USER=admin
+      - ADMIN_PASS=admin
+
+      - DEBUG=FALSE
+    networks:
+      - proxy
+      - services
+    restart: always
+
+  limesurvey-db:
+    container_name: limesurvey-db
+    image: tiredofit/mariadb
+    volumes:
+      - ./db:/var/lib/mysql
+    environment:
+      - ROOT_PASS=password
+      - DB_NAME=limesurvey
+      - DB_USER=limesurvey
+      - DB_PASS=limesurveypass
+    networks:
+      - services
+    restart: always
+
+  limesurvey-db-backup:
+    container_name: limesurvey-db-backup
+    image: tiredofit/db-backup
+    links:
+     - limesurvey-db
+    volumes:
+      - ./dbbackup:/backup
+    environment:
+      - ZABBIX_HOSTNAME=limesurvey-db-backup
+      - DB_HOST=limesurvey-db
+      - DB_TYPE=mariadb
+      - DB_NAME=limesurvey
+      - DB_USER=limesurvey
+      - DB_PASS=limesurveypass
+      - DB_DUMP_FREQ=1440
+      - DB_DUMP_BEGIN=0000
+      - DB_CLEANUP_TIME=8640
+      - COMPRESSION=BZ
+      - MD5=TRUE
+    networks:
+      - services
+    restart: always
+
+networks:
+  proxy:
+    external: true
+  services:
+    external: true
+

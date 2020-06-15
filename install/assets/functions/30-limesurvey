@@ -1,0 +1,14 @@
+#!/usr/bin/with-contenv bash
+
+### Set Defaults
+ADMIN_EMAIL=${ADMIN_EMAIL:-'admin@example.com'}
+ADMIN_NAME=${ADMIN_NAME:-'admin'}
+ADMIN_USER=${ADMIN_USER:-'admin'}
+DB_HOST=${DB_HOST:-'mysql'}
+DB_NAME=${DB_NAME:-'limesurvey'}
+DB_PORT=${DB_PORT:-'3306'}
+DB_TABLE_PREFIX=${DB_TABLE_PREFIX:-'lime_'}
+DB_TYPE=${DB_TYPE:-'mysql'}
+DB_USER=${DB_USER:-'limesurvey'}
+PUBLIC_URL=${PUBLIC_URL:-}
+URL_FORMAT=${URL_FORMAT:-'path'}
