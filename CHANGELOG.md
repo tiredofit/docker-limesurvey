@@ -1,3 +1,9 @@
+## 1.4.4 2020-10-28 <dave at tiredofit dot ca>
+
+   ### Added
+      - Update to Limesurvey 3.2.4.2+201020
+
+
 ## 1.4.3 2020-05-12 <dave at tiredofit dot ca>
 
    ### Added
