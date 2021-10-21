@@ -1,6 +1,6 @@
-FROM docker.io/tiredofit/nginx-php-fpm:7.4
+FROM docker.io/tiredofit/nginx-php-fpm:8.0
 
-ENV LIMESURVEY_VERSION=4.6.3+210518 \
+ENV LIMESURVEY_VERSION=5.1.0+210811 \
     PHP_ENABLE_CREATE_SAMPLE_PHP=FALSE \
     PHP_ENABLE_FILEINFO=TRUE \
     PHP_ENABLE_IMAP=TRUE \

@@ -1,3 +1,9 @@
+## 1.5.2 2021-10-21 <dave at tiredofit dot ca>
+
+   ### Added
+      - Limesurvey 5.1.0
+
+
 ## 1.5.1 2021-10-21 <dave at tiredofit dot ca>
 
    ### Added
