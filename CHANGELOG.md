@@ -1,9 +1,7 @@
-## 1.6.0 2021-10-21 <dave at tiredofit dot ca>
+## 1.5.1 2021-10-21 <dave at tiredofit dot ca>
 
    ### Added
-      - PHP 8
-      - Limesurvey 5.1.15+211011
-
+      - Limesurvey 4.6.3+210518
 
 ## 1.5.0 2021-03-20 <dave at tiredofit dot ca>
 
