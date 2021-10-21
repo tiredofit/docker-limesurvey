@@ -16,7 +16,7 @@ services:
       - ./logs/:/www/logs
       - ./assets/custom:/assets/custom
     environment:
-      - ZABBIX_HOSTNAME=limesurvey-app
+      - CONTAINER_NAME=limesurvey-app
 
       - DB_HOST=limesurvey-db
       - DB_NAME=limesurvey
@@ -54,7 +54,7 @@ services:
     volumes:
       - ./dbbackup:/backup
     environment:
-      - ZABBIX_HOSTNAME=limesurvey-db-backup
+      - CONTAINER_NAME=limesurvey-db-backup
       - DB_HOST=limesurvey-db
       - DB_TYPE=mariadb
       - DB_NAME=limesurvey
