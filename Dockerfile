@@ -12,7 +12,8 @@ ENV LIMESURVEY_VERSION=5.1.0+210811 \
     PHP_ENABLE_XMLWRITER=TRUE \
     PHP_ENABLE_ZIP=TRUE \
     NGINX_WEBROOT="/www/html" \
-    CONTAINER_NAME=limesurvey-app
+    IMAGE_NAME="tiredofit/limesurvey" \
+    IMAGE_REPO_URL="https://github.com/tiredofit/docker-limesurvey/"
 
 RUN set +x && \
     apk update && \
