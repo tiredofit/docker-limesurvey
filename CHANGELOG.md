@@ -1,3 +1,9 @@
+## 1.5.5 2022-06-03 <dave at tiredofit dot ca>
+
+   ### Added
+      - 5.2.14+220214
+
+
 ## 1.5.4 2022-06-03 <dave at tiredofit dot ca>
 
    ### Added
