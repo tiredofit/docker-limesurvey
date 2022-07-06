@@ -1,3 +1,9 @@
+## 1.5.7 2022-07-06 <radarsymphony@github>
+
+   ### Added
+      - Add custom script execution support
+
+
 ## 1.5.6 2022-06-03 <dave at tiredofit dot ca>
 
    ### Added

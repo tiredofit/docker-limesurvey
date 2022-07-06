@@ -11,6 +11,7 @@ ENV LIMESURVEY_VERSION=5.3.17+220525 \
     PHP_ENABLE_SODIUM=TRUE \
     PHP_ENABLE_XMLWRITER=TRUE \
     PHP_ENABLE_ZIP=TRUE \
+    NGINX_SITE_ENABLED=limesurvey \
     NGINX_WEBROOT="/www/html" \
     IMAGE_NAME="tiredofit/limesurvey" \
     IMAGE_REPO_URL="https://github.com/tiredofit/docker-limesurvey/"
