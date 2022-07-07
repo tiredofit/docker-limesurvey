@@ -1,3 +1,13 @@
+## 1.5.8 2022-07-07 <dave at tiredofit dot ca>
+
+   ### Added
+      - Modernize Image
+      - LimeSurvey 5.3.22+220628
+
+   ### Changed
+      - Just use default php-fpm configuration
+
+
 ## 1.5.7 2022-07-06 <radarsymphony@github>
 
    ### Added

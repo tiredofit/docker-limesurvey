@@ -1,66 +1,62 @@
 #!/command/with-contenv bash
 
-for s in /assets/functions/*; do source $s; done
+source /assets/functions/00-container
+prepare_service
 PROCESS_NAME="limesurvey"
-
-check_service_initialized init 20-php-fpm
 
 ### Sanity Test
 sanity_db
 sanity_var ADMIN_PASS "Admin Password"
 
 ### Generate Configuration Files
-if [ -f ${NGINX_WEBROOT}/application/config/config.php ]; then
+if [ -f "${NGINX_WEBROOT}"/application/config/config.php ]; then
     print_warn "[limesurvey] Skipping setup as config.php already exists"
 else
     print_notice "[limesurvey] Generating Config Files"
 
-    if [ "$DB_TYPE" = 'mysql' ]; then
+    if [ "${DB_TYPE,,}" = 'mysql' ]; then
         db_ready mariadb
         DB_CHARSET=${DB_CHARSET:-'utf8mb4'}
-        cp ${NGINX_WEBROOT}/application/config/config-sample-mysql.php ${NGINX_WEBROOT}/application/config/config.php
+        cp "${NGINX_WEBROOT}"/application/config/config-sample-mysql.php "${NGINX_WEBROOT}"/application/config/config.php
     fi
 
-    sed -i "s#\('connectionString' => \).*,\$#\\1'${DB_TYPE}:host=${DB_HOST};port=${DB_PORT};dbname=${DB_NAME};',#g" ${NGINX_WEBROOT}/application/config/config.php
-    
-    sed -i "s#\('username' => \).*,\$#\\1'${DB_USER}',#g" ${NGINX_WEBROOT}/application/config/config.php
-    sed -i "s#\('password' => \).*,\$#\\1'${DB_PASS}',#g" ${NGINX_WEBROOT}/application/config/config.php
-    sed -i "s#\('charset' => \).*,\$#\\1'${DB_CHARSET}',#g" ${NGINX_WEBROOT}/application/config/config.php
-    sed -i "s#\('tablePrefix' => \).*,\$#\\1'${DB_TABLE_PREFIX}',#g" ${NGINX_WEBROOT}/application/config/config.php
+    sed -i "s#\('connectionString' => \).*,\$#\\1'${DB_TYPE}:host=${DB_HOST};port=${DB_PORT};dbname=${DB_NAME};',#g" "${NGINX_WEBROOT}"/application/config/config.php
+    sed -i "s#\('username' => \).*,\$#\\1'${DB_USER}',#g" "${NGINX_WEBROOT}"/application/config/config.php
+    sed -i "s#\('password' => \).*,\$#\\1'${DB_PASS}',#g" "${NGINX_WEBROOT}"/application/config/config.php
+    sed -i "s#\('charset' => \).*,\$#\\1'${DB_CHARSET}',#g" "${NGINX_WEBROOT}"/application/config/config.php
+    sed -i "s#\('tablePrefix' => \).*,\$#\\1'${DB_TABLE_PREFIX}',#g" "${NGINX_WEBROOT}"/application/config/config.php
 
     # Set URL config
-    sed -i "s#\('urlFormat' => \).*,\$#\\1'${URL_FORMAT}',#g" ${NGINX_WEBROOT}/application/config/config.php
+    sed -i "s#\('urlFormat' => \).*,\$#\\1'${URL_FORMAT}',#g" "${NGINX_WEBROOT}"/application/config/config.php
 
     # Set Public URL
     if [ -z "$PUBLIC_URL" ]; then
         echo 'Info: Setting PublicURL'
-        sed -i "s#\('debug'=>0,\)\$#'publicurl'=>'${PUBLIC_URL}',\n\t\t\\1 #g" ${NGINX_WEBROOT}/application/config/config.php
+        sed -i "s#\('debug'=>0,\)\$#'publicurl'=>'${PUBLIC_URL}',\n\t\t\\1 #g" "${NGINX_WEBROOT}"/application/config/config.php
     fi
 
     ### Set Debug Mode
-    if [ "$DEBUG" = "TRUE" ] || [ "$DEBUG" = "true" ]; then
-        sed -i "s#'debug'=>0#'debug'=>1#g" ${NGINX_WEBROOT}/application/config/config.php
+    if [ "${DEBUG,,}" = "true" ] ; then
+        sed -i "s#'debug'=>0#'debug'=>1#g" "${NGINX_WEBROOT}"/application/config/config.php
     fi
-
 fi
-
 
 # Check if LimeSurvey database is provisioned
 print_notice "Checking if database already provisioned..."
-silent php ${NGINX_WEBROOT}/application/commands/console.php updatedb
+silent php "${NGINX_WEBROOT}"/application/commands/console.php updatedb
 
 if [ $? -eq 0 ]; then
     print_notice "Database already provisioned"
 else
     print_info "Installing Limesurvey"
-    silent php ${NGINX_WEBROOT}/application/commands/console.php install $ADMIN_USER $ADMIN_PASS $ADMIN_NAME $ADMIN_EMAIL
+    silent php "${NGINX_WEBROOT}"/application/commands/console.php install $ADMIN_USER $ADMIN_PASS $ADMIN_NAME $ADMIN_EMAIL
 fi
 
 # Custom Support
 if [ -d /assets/custom ] ; then
     print_warn "Custom Assets Found, Copying over top of Master.."
-    cp -R /assets/custom/* ${NGINX_WEBROOT}/
-    chown -R nginx:www-data ${NGINX_WEBROOT}/
+    cp -R /assets/custom/* "${NGINX_WEBROOT}"/
+    chown -R nginx:www-data "${NGINX_WEBROOT}"/
 fi
 
 ## Execute Custom Scripts
@@ -71,6 +67,6 @@ if [ -d /assets/custom-scripts/ ] ; then
     chmod +x "${f}"
     ${f}
   done
-fi 
+fi
 
 liftoff
