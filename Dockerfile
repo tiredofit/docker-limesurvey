@@ -1,7 +1,7 @@
 FROM docker.io/tiredofit/nginx-php-fpm:8.0
 LABEL maintainer="Dave Conroy (github.com/tiredofit)"
 
-ENV LIMESURVEY_VERSION=5.3.22+220628 \
+ENV LIMESURVEY_VERSION=5.3.28+220727 \
     PHP_ENABLE_CREATE_SAMPLE_PHP=FALSE \
     PHP_ENABLE_FILEINFO=TRUE \
     PHP_ENABLE_IMAP=TRUE \
