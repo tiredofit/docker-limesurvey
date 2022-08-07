@@ -52,21 +52,7 @@ else
     silent php "${NGINX_WEBROOT}"/application/commands/console.php install $ADMIN_USER $ADMIN_PASS $ADMIN_NAME $ADMIN_EMAIL
 fi
 
-# Custom Support
-if [ -d /assets/custom ] ; then
-    print_warn "Custom Assets Found, Copying over top of Master.."
-    cp -R /assets/custom/* "${NGINX_WEBROOT}"/
-    chown -R nginx:www-data "${NGINX_WEBROOT}"/
-fi
-
-## Execute Custom Scripts
-if [ -d /assets/custom-scripts/ ] ; then
-  print_warn "Found Custom Scripts to Execute"
-  for f in $(find /assets/custom-scripts/ -name \*.sh -type f); do
-    print_warn "Running Script ${f}"
-    chmod +x "${f}"
-    ${f}
-  done
-fi
+custom_files "${CONTAINER_CUSTOM_PATH}" "${NGINX_WEBROOT}" "${NGINX_USER}" "${NGINX_GROUP}"
+custom_scripts
 
 liftoff
