@@ -26,4 +26,4 @@ RUN set +x && \
            ${NGINX_WEBROOT}/*.md && \
     rm -rf /var/cache/apk/*
 
-ADD install /
+COPY install /
