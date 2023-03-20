@@ -1,7 +1,12 @@
-FROM docker.io/tiredofit/nginx-php-fpm:8.0
+ARG PHP_VERSION=8.0
+ARG DISTRO=alpine
+
+FROM docker.io/tiredofit/nginx-php-fpm:${PHP_VERSION}-${DISTRO}
 LABEL maintainer="Dave Conroy (github.com/tiredofit)"
 
-ENV LIMESURVEY_VERSION=5.3.28+220727 \
+ARG LIMESURVEY_VERSION
+
+ENV LIMESURVEY_VERSION=${LIMESURVEY_VESION:-"5.6.10+230313"} \
     PHP_ENABLE_CREATE_SAMPLE_PHP=FALSE \
     PHP_ENABLE_FILEINFO=TRUE \
     PHP_ENABLE_IMAP=TRUE \
@@ -16,14 +21,16 @@ ENV LIMESURVEY_VERSION=5.3.28+220727 \
     IMAGE_NAME="tiredofit/limesurvey" \
     IMAGE_REPO_URL="https://github.com/tiredofit/docker-limesurvey/"
 
-RUN set +x && \
-    apk update && \
-    apk upgrade && \
-    mkdir -p ${NGINX_WEBROOT} && \
-    curl -SL https://github.com/LimeSurvey/LimeSurvey/archive/${LIMESURVEY_VERSION}.tar.gz | tar xvfz - --strip 1 -C ${NGINX_WEBROOT} && \
-    rm -rf ${NGINX_WEBROOT}/docs \
-           ${NGINX_WEBROOT}/tests \
-           ${NGINX_WEBROOT}/*.md && \
-    rm -rf /var/cache/apk/*
+RUN source /assets/functions/00-container && \
+    set +x && \
+    package update && \
+    package upgrade && \
+    mkdir -p "${NGINX_WEBROOT}" && \
+    curl -SL https://github.com/LimeSurvey/LimeSurvey/archive/"${LIMESURVEY_VERSION}".tar.gz | tar xvfz - --strip 1 -C "${NGINX_WEBROOT}" && \
+    rm -rf \
+           "${NGINX_WEBROOT}"/docs \
+           "${NGINX_WEBROOT}"/tests \
+           "${NGINX_WEBROOT}"/*.md && \
+    package cleanup
 
 COPY install /
