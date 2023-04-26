@@ -8,6 +8,17 @@ PROCESS_NAME="limesurvey"
 sanity_db
 sanity_var ADMIN_PASS "Admin Password"
 
+transform_file_var \
+                        ADMIN_EMAIL \
+                        ADMIN_NAME \
+                        ADMIN_PASS \
+                        ADMIN_USER \
+                        DB_HOST \
+                        DB_NAME \
+                        DB_PASS \
+                        DB_PORT \
+                        DB_USER
+
 ### Generate Configuration Files
 if [ -f "${NGINX_WEBROOT}"/application/config/config.php ]; then
     print_warn "[limesurvey] Skipping setup as config.php already exists"
