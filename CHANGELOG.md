@@ -1,8 +1,10 @@
-## 5-1.6.13 2023-08-17 <dave at tiredofit dot ca>
+## 6-1.6.13 2023-08-17 <dave at tiredofit dot ca>
 
-There are no changes with this release, other than splitting to discrete branches for 5.x and 6.x
+First release of 6 branch
 
    ### Added
+      - LimeSurvey 6.2.1+230807
+      - PHP 8.2
 
 
 ## 1.6.12 2023-08-14 <dave at tiredofit dot ca>
