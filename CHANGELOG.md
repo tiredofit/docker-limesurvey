@@ -1,3 +1,9 @@
+## 5-1.6.14 2023-08-21 <dave at tiredofit dot ca>
+
+   ### Added
+      - LimeSurvey 5.6.34+230816
+
+
 ## 5-1.6.13 2023-08-17 <dave at tiredofit dot ca>
 
 There are no changes with this release, other than splitting to discrete branches for 5.x and 6.x
