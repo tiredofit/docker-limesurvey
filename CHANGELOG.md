@@ -1,3 +1,9 @@
+## 5-1.6.15 2023-08-28 <dave at tiredofit dot ca>
+
+   ### Added
+      - LumeSurvey 5.6.35+230822
+
+
 ## 5-1.6.14 2023-08-21 <dave at tiredofit dot ca>
 
    ### Added
