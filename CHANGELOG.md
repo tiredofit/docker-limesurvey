@@ -1,3 +1,9 @@
+## 5-1.6.17 2023-09-25 <dave at tiredofit dot ca>
+
+   ### Added
+      - Limesurvey 5.6.38+230919
+
+
 ## 5-1.6.16 2023-09-04 <dave at tiredofit dot ca>
 
    ### Added
