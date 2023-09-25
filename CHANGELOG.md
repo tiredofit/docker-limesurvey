@@ -1,3 +1,9 @@
+## 6-1.6.14 2023-09-25 <dave at tiredofit dot ca>
+
+   ### Added
+      - Limesurvey 6.2.8+230921
+
+
 ## 6-1.6.13 2023-08-17 <dave at tiredofit dot ca>
 
 First release of 6 branch
