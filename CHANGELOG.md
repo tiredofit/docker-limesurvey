@@ -1,3 +1,9 @@
+## 6-1.6.19 2023-11-13 <dave at tiredofit dot ca>
+
+   ### Added
+      - LimeSurvey 6.3.4+231108
+
+
 ## 6-1.6.18 2023-11-06 <dave at tiredofit dot ca>
 
    ### Added

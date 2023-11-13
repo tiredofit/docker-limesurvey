@@ -1,8 +1,7 @@
-version: '3.7'
 services:
 
   limesurvey-app:
-    image: tiredofit/limesurvey:latest
+    image: tiredofit/limesurvey:6
     container_name: limesurvey-app
     labels:
       - traefik.enable=true
@@ -16,6 +15,7 @@ services:
       - ./logs/:/www/logs
       - ./assets/custom:/assets/custom
     environment:
+      - TIMEZONE=America/Vancouver
       - CONTAINER_NAME=limesurvey-app
 
       - DB_HOST=limesurvey-db
@@ -34,10 +34,12 @@ services:
 
   limesurvey-db:
     container_name: limesurvey-db
-    image: tiredofit/mariadb
+    image: tiredofit/mariadb:10.11
     volumes:
       - ./db:/var/lib/mysql
     environment:
+      - TIMEZONE=America/Vancouver
+      - CONTAINER_NAME/limesurvey-db
       - ROOT_PASS=password
       - DB_NAME=limesurvey
       - DB_USER=limesurvey
@@ -54,17 +56,17 @@ services:
     volumes:
       - ./dbbackup:/backup
     environment:
+      - TIMEZONE=America/Vancouver 
       - CONTAINER_NAME=limesurvey-db-backup
-      - DB_HOST=limesurvey-db
-      - DB_TYPE=mariadb
-      - DB_NAME=limesurvey
-      - DB_USER=limesurvey
-      - DB_PASS=limesurveypass
-      - DB_DUMP_FREQ=1440
-      - DB_DUMP_BEGIN=0000
-      - DB_CLEANUP_TIME=8640
-      - COMPRESSION=BZ
-      - MD5=TRUE
+
+      - DB01_HOST=limesurvey-db
+      - DB01_TYPE=mariadb
+      - DB01_NAME=limesurvey
+      - DB01_USER=limesurvey
+      - DB01_PASS=limesurveypass
+      - DB01_BACKUP_INTERVAL=1440
+      - DB01_BACKUP_BEGIN=0000
+      - DB01_CLEANUP_TIME=8640
     networks:
       - services
     restart: always
