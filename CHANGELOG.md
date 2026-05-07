@@ -1,3 +1,9 @@
+## 6-1.7.7 2026-05-07 <code at nfrastack dot com>
+
+   ### Added
+      - LimeSurvey 6.17.1+260427
+
+
 ## 6-1.7.6 2026-04-27 <code at nfrastack dot com>
 
    ### Added
