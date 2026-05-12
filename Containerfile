@@ -18,7 +18,7 @@ LABEL \
         org.opencontainers.image.licenses="MIT"
 
 ARG \
-    LIMESURVEY_VERSION="6.17.1+260427" \
+    LIMESURVEY_VERSION="6.17.2+260507" \
     LIMESURVEY_REPO_URL="https://github.com/LimeSurvey/LimeSurvey"
 
 COPY CHANGELOG.md /usr/src/container/CHANGELOG.md
